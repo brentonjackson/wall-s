@@ -12,6 +12,7 @@ import imagezmq
 import argparse
 import socket
 import time
+import cv2
 
 # construct argument parser and parse arguments
 ap = argparse.ArgumentParser()
@@ -26,13 +27,44 @@ sender = imagezmq.ImageSender(
 # get hostname, initialize video stream, and allow
 # camera sensor to warmup
 rpiName = socket.gethostname()
-vs = VideoStream(src=0).start()
-delay = 5  # send frames every 5 seconds to reduce load
+vs = VideoStream(src=-1).start()
+delay = 1  # send frames every 5 seconds to reduce load
 time.sleep(2.0)
 
 while True:
     # read frame from camera and send to server
     frame = vs.read()
+    cv2.imwrite("whatever.jpg", frame)
+    #img_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    #img_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    
+    
+    #stop_data = cv2.CascadeClassifier('')
+    
+    #found = stop_data.detectMultiScale(img_gray, 
+    #                                minSize =(20, 20))
+    
+    
+    # we found the motor position
+    # call the arduino
+    
+    
     # frame = imutils.resize(frame, width=320)
-    sender.send_image(rpiName, frame)
+    position = sender.send_image(rpiName, frame)
+    f = open('positionData.txt', 'w')
+    f.write(position.decode())
+    f.close()
+
     time.sleep(delay)
+    #recieve.data
+    #if not objects in data:
+  #      ardunio.goforward
+  #  else:
+  #      arduino.motor1(pos1)
+  #      arduino.motor2(pos2)
+    
+    
+    
+    
+    time.sleep(delay)
+
