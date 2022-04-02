@@ -9,9 +9,11 @@ import numpy as np
 
 imageHub = imagezmq.ImageHub()
 # initialize neural network stuff #
-def predict_stage(image_data,model):
+
+
+def predict_stage(image_data, model):
     size = (224, 224)
-    image = ImageOps.fit(image_data,size, Image.ANTIALIAS)
+    image = ImageOps.fit(image_data, size, Image.ANTIALIAS)
     image_array = np.array(image)
     normalized_image_array = (image_array.astype(np.float32) / 127.0) - 1
     data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
@@ -24,10 +26,10 @@ def predict_stage(image_data,model):
 
 
 def fruit_price(arr):
-    if (arr[0]>arr[1] and arr[0]>arr[2]):
+    if (arr[0] > arr[1] and arr[0] > arr[2]):
         # Unripe
         return 10
-    elif (arr[1]>arr[0] and arr[1]>arr[2]):
+    elif (arr[1] > arr[0] and arr[1] > arr[2]):
         # Overripe
         return 3
     else:
@@ -60,7 +62,8 @@ while True:
     # price = random.choice([0.75, 1.00, 1.25, 2.00, 3.00])
 
     print('random price: ', price)
-    f.write(str(price))
+    # f.write(str(price))
+    f.write('test to david')
     f.close()
 
     cv2.imshow(rpiName, frame)
