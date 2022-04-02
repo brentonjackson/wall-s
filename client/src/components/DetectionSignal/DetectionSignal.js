@@ -5,35 +5,34 @@ import {
   Typography,
   CircularProgress,
 } from "@material-ui/core/";
-// import stockPhoto from "./stockPhoto.jpg";
 
 import * as api from "../../api";
 
 const DetectionSignal = () => {
-  //   const [frameSrc, setFrameSrc] = useState("stockPhoto.jpg");
+  const [frameSrc, setFrameSrc] = useState("stockPhoto.jpg");
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      //update frame every 2 seconds
-      api
-        .fetchFrame()
-        .then((obj) => {
-          let newData = obj.data.data;
-          return newData;
-        })
-        .then((newData) => {
-          setFrameSrc((prevState) => newData);
-        })
-        .catch((err) => {
-          console.log(err);
-          setFrameSrc((prevState) => prevState);
-        });
-    }, 2000);
+  //   useEffect(() => {
+  //     const intervalId = setInterval(() => {
+  //       //update frame every 2 seconds
+  //       api
+  //         .fetchFrame()
+  //         .then((obj) => {
+  //           let newData = obj.data.data;
+  //           return newData;
+  //         })
+  //         .then((newData) => {
+  //           setFrameSrc((prevState) => newData);
+  //         })
+  //         .catch((err) => {
+  //           console.log(err);
+  //           setFrameSrc((prevState) => prevState);
+  //         });
+  //     }, 2000);
 
-    return () => {
-      clearInterval(intervalId); //This is important
-    };
-  }, [useState]);
+  //     return () => {
+  //       clearInterval(intervalId); //This is important
+  //     };
+  //   }, [useState]);
 
   return !frameSrc ? (
     <CircularProgress />
