@@ -26,7 +26,7 @@ sender = imagezmq.ImageSender(
 # get hostname, initialize video stream, and allow
 # camera sensor to warmup
 rpiName = socket.gethostname()
-vs = VideoStream(src=0).start()
+vs = VideoStream(src=-1).start()
 delay = 5  # send frames every 5 seconds to reduce load
 time.sleep(2.0)
 

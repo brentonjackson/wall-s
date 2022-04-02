@@ -3,7 +3,7 @@
 
 import cv2
 import imagezmq
-import tensorflow as tf
+#import tensorflow as tf
 from PIL import Image, ImageOps
 import numpy as np
 
@@ -44,13 +44,13 @@ while True:
 
     ########### PROCESS FRAME #######
 
-    image = Image.fromarray(frame)
+    #image = Image.fromarray(frame)
     #st.image(image, use_column_width=True)
-    model = tf.keras.models.load_model('ripeness.h5')
-    prediction = predict_stage(image, model)
-    probarr = prediction[0]
-    price = fruit_price(probarr)
-    print('THE PREDICTION IS ' + str(price))
+    #model = tf.keras.models.load_model('ripeness.h5')
+    #prediction = predict_stage(image, model)
+    #probarr = prediction[0]
+    #price = fruit_price(probarr)
+    #print('THE PREDICTION IS ' + str(price))
 
     #################################
 
@@ -61,18 +61,18 @@ while True:
     # price = fruit_price(fruit_status)
     # price = random.choice([0.75, 1.00, 1.25, 2.00, 3.00])
 
-    print('random price: ', price)
+    #print('random price: ', price)
     # f.write(str(price))
     f.write('test to david')
     f.close()
 
-    cv2.imshow(rpiName, frame)
+    #cv2.imshow(rpiName, frame)
 
     ##################################
 
-    key = cv2.waitKey(1) & 0xFF
-    if key == ord('q'):
-        break
+    #key = cv2.waitKey(1) & 0xFF
+    #if key == ord('q'):
+ #       break
 
 # cleanup
 cv2.destroyAllWindows()
