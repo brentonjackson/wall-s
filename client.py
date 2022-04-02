@@ -32,39 +32,44 @@ delay = 1  # send frames every 5 seconds to reduce load
 time.sleep(2.0)
 
 while True:
-    # read frame from camera and send to server
+    # read frame from camera and save it on raspberry pi
     frame = vs.read()
-    cv2.imwrite("whatever.jpg", frame)
+    cv2.imwrite("currentFrame.jpg", frame)
     #img_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     #img_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    
-    
+
     #stop_data = cv2.CascadeClassifier('')
-    
-    #found = stop_data.detectMultiScale(img_gray, 
+
+    # found = stop_data.detectMultiScale(img_gray,
     #                                minSize =(20, 20))
-    
-    
+
     # we found the motor position
     # call the arduino
-    
-    
-    # frame = imutils.resize(frame, width=320)
+
+    # send image to server and
+    # save response from server processing
     position = sender.send_image(rpiName, frame)
-    f = open('positionData.txt', 'w')
-    f.write(position.decode())
-    f.close()
+
+    # if we get a position from server, stop and go to that position
+    # until all positions visited
+    # else, go forward along path
+    if position == b'OK':
+        # move forward (control arduino)
+        print(position)
+    else:
+        # go to position
+        print(position)
+
+    # f = open('positionData.txt', 'w')
+    # f.write(position.decode())
+    # f.close()
 
     time.sleep(delay)
-    #recieve.data
-    #if not objects in data:
+    # recieve.data
+    # if not objects in data:
   #      ardunio.goforward
   #  else:
   #      arduino.motor1(pos1)
   #      arduino.motor2(pos2)
-    
-    
-    
-    
-    time.sleep(delay)
 
+    time.sleep(delay)
