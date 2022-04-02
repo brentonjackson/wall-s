@@ -27,10 +27,9 @@ sender = imagezmq.ImageSender(
 # get hostname, initialize video stream, and allow
 # camera sensor to warmup
 rpiName = socket.gethostname()
-vs = VideoStream(src=0).start()
-delay = 1  # send frames every 5 seconds to reduce load
+vs = VideoStream(src=-1).start()
+delay = 0.5  # send frames every 5 seconds to reduce load
 time.sleep(2.0)
-
 while True:
     # read frame from camera and save it on raspberry pi
     frame = vs.read()
@@ -72,4 +71,4 @@ while True:
   #      arduino.motor1(pos1)
   #      arduino.motor2(pos2)
 
-    time.sleep(delay)
+    # time.sleep(delay)

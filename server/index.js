@@ -5,7 +5,6 @@ import streamRoutes from "./routes/stream.js";
 import detectionRoutes from "./routes/detection.js";
 
 const app = express();
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json({ limit: "30mb", extended: true }));
 app.use(express.urlencoded({ limit: "30mb", extended: true }));
