@@ -1,0 +1,27 @@
+{
+  "name": "wall-s-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "server": "python3 server.py",
+    "webserver": "npm start",
+    "webclient": "cd ../client && npm start",
+    "start": "node index.js",
+    "dev": "concurrently \"npm run server\" \"npm run webserver\" \"npm run webclient\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "concurrently": "^7.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.1",
+    "twilio": "^3.75.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
