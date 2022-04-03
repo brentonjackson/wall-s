@@ -15,7 +15,10 @@ const DetectionSignal = () => {
           return newData;
         })
         .then((newData) => {
+<<<<<<< HEAD
           console.log(newData.data);
+=======
+>>>>>>> 3bbd040b8954b27dd206f4c4b27efdbb67afb3dd
           setIsDisabled((prevState) => newData.data);
         })
         .catch((err) => {

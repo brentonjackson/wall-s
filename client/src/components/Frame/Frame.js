@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+<<<<<<< HEAD
 import {
   Card,
   CardContent,
@@ -7,6 +8,8 @@ import {
 } from "@material-ui/core/";
 // import stockPhoto from "./stockPhoto.jpg";
 
+=======
+>>>>>>> 3bbd040b8954b27dd206f4c4b27efdbb67afb3dd
 import { fetchFrame } from "../../api/fetchFrame";
 
 const Frame = () => {
