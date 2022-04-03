@@ -1,0 +1,8 @@
+opencv
+numpy
+imutils
+imagezmq
+pillow
+pyserial
+
+ml.weights (https://pjreddie.com/media/files/yolov3.weights)
