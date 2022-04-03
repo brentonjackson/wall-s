@@ -59,9 +59,9 @@ while True:
         # go to position
         print(position)
 
-    # f = open('positionData.txt', 'w')
-    # f.write(position.decode())
-    # f.close()
+    f = open('isThereTrash.txt', 'w')
+    f.write("true")
+    f.close()
 
     time.sleep(delay)
     # recieve.data
