@@ -38,7 +38,7 @@ sender = imagezmq.ImageSender(
 # camera sensor to warmup
 rpiName = socket.gethostname()
 vs = VideoStream(src=0).start()
-delay = 1  # send frames every 5 seconds to reduce load
+delay = 5  # send frames every 5 seconds to reduce load
 time.sleep(2.0)
 while True:
     # read frame from camera and save it on raspberry pi
@@ -58,10 +58,6 @@ while True:
     # send image to server and
     # save response from server processing
     commands = sender.send_image(rpiName, frame)
-
-    f = open('isThereTrash.txt', 'w')
-    f.write("true")
-    f.close()
 
     time.sleep(delay)
     # f = open('positionData.txt', 'w')

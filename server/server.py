@@ -38,8 +38,8 @@ net = cv2.dnn.readNet('ml.weights', 'ml.cfg')
 class_ids = []
 confidences = []
 boxes = []
-conf_threshold = 0.95
-nms_threshold = 0.1
+conf_threshold = 0.99
+nms_threshold = 0.05
 ###################################
 
 
@@ -96,7 +96,7 @@ while True:
     ######## WEB SERVER PROCESSING ##########
 
     f = open('isThereTrash.txt', 'w')
-    if num_objects > 0:
+    if num_objects > 1:
         f.write("true")
     else:
         f.write("false")
@@ -105,6 +105,8 @@ while True:
     cv2.imwrite("../client/public/images/currentFrame.jpg", frame)
 
     ########## PI INTERFACING ##########
+
+    # Calculate locations for pi
 
     """      
     how commands work:
