@@ -36,8 +36,8 @@ net = cv2.dnn.readNet('ml.weights', 'ml.cfg')
 class_ids = []
 confidences = []
 boxes = []
-conf_threshold = 0.9
-nms_threshold = 0.4
+conf_threshold = 0.95
+nms_threshold = 0.1
 ###################################
 
 
