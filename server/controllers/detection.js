@@ -8,7 +8,6 @@ export const getDetection = async (req, res) => {
     // get frame from file
     let filename = "isThereTrash.txt";
     let trash = fs.readFileSync(process.cwd() + "/" + filename).toString();
-    console.log(trash);
     res.json({
       data: trash,
     });
