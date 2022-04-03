@@ -11,7 +11,7 @@ app.use(express.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
 app.use("/stream", streamRoutes);
-app.use("/detection", detectionRoutes);
+app.use("/trash", detectionRoutes);
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

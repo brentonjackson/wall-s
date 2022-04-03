@@ -1,22 +1,18 @@
 import express from "express";
 import fs from "fs";
-import dotenv from "dotenv";
-
-if (process.env.NODE_ENV !== "production") {
-  dotenv.config();
-}
 
 const router = express.Router();
 
 export const getDetection = async (req, res) => {
   try {
     // get frame from file
-    let filename = "currentFrame.jpg";
-    // let price = fs.readFileSync(process.cwd() + "/" + filename).toString();
-
+    let filename = "isThereTrash.txt";
+    let trash = fs.readFileSync(process.cwd() + "/" + filename).toString();
+    console.log(trash);
     res.json({
-      data: filename,
+      data: trash,
     });
+    console.log("got the right file");
   } catch (error) {
     res.status(404).json({ message: error.message });
     console.log("error getting file");

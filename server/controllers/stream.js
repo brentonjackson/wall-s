@@ -4,8 +4,6 @@ import fs from "fs";
 const router = express.Router();
 
 export const getFrame = async (req, res) => {
-  res.set("Cache-Control", "no-store");
-
   try {
     // get frame from file
     let filePath = "../client/public/images/";
@@ -17,7 +15,6 @@ export const getFrame = async (req, res) => {
           data: filename,
           key: Date.now(),
         });
-        console.log("hit endpoint");
       } else {
         res.json({ data: "" });
         console.log("hit no file");

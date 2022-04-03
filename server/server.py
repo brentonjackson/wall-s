@@ -26,12 +26,12 @@ while True:
 
     ######## PROCESSING #####
 
-    f = open('currentFruitPrice.txt', 'w')
-    f.write('test to david')
+    f = open('isThereTrash.txt', 'w')
+    f.write("true")
     f.close()
 
     cv2.imshow(rpiName, frame)
-    cv2.imwrite('../client/public/images/currentFrame.jpg', frame)
+    cv2.imwrite("../client/public/images/currentFrame.jpg", frame)
 
     ##################################
     # send position back to raspberry pi
