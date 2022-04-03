@@ -3,7 +3,6 @@ import { fetchTrash } from "../../api/fetchTrash";
 
 const DetectionSignal = () => {
   const [isDisabled, setIsDisabled] = useState(true);
-  // const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -11,21 +10,16 @@ const DetectionSignal = () => {
       fetchTrash()
         .then((obj) => {
           let newData = obj.data;
-          setIsDisabled((prevState) => newData.data);
           return newData;
         })
         .then((newData) => {
-<<<<<<< HEAD
-          console.log(newData.data);
-=======
->>>>>>> 3bbd040b8954b27dd206f4c4b27efdbb67afb3dd
           setIsDisabled((prevState) => newData.data);
         })
         .catch((err) => {
           console.log(err);
           setIsDisabled((prevState) => prevState);
         });
-    }, 5000);
+    }, 4000);
 
     return () => {
       clearInterval(intervalId); //This is important
