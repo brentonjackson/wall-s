@@ -74,7 +74,6 @@ while True:
     indices = cv2.dnn.NMSBoxes(
         boxes, confidences, conf_threshold, nms_threshold)
     for i in indices:
-        i = i[0]
         box = boxes[i]
         x = box[0]
         y = box[1]
