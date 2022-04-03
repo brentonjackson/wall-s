@@ -18,7 +18,6 @@ export const getFrame = async (req, res) => {
       } else {
         res.json({ data: "" });
         console.log("hit no file");
-        console.log(process.cwd());
       }
     } catch (err) {
       res.status(404).json({ message: error.message });
