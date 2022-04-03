@@ -7,6 +7,8 @@ import imagezmq
 from PIL import Image, ImageOps
 import numpy as np
 
+
+
 imageHub = imagezmq.ImageHub()
 # initialize neural network stuff #
 
@@ -56,7 +58,7 @@ while True:
     steer = input("steer: ")
 
 
-    commands = [float(motor), None, float(arm), None, float(steer)]
+    commands = [float(motor), float(arm), float(steer)]
     imageHub.send_reply(bytes(str(commands), 'UTF-8'))
     print(f'sent {motor} {arm} {steer}')
 

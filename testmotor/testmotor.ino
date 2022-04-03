@@ -40,25 +40,20 @@ void setup() {
   myStepper.setSpeed(400);
 }
 
-void loop() {
-  Serial.println("led is high starting out");
-   while (!Serial.available());
+void loop() {  
   float motor_change  = Serial.parseFloat();
   float arm_movement = Serial.parseFloat();
   float steer_move =  Serial.parseFloat();
   Serial.println(motor_change);
   Serial.println(arm_movement);
   Serial.println(steer_move);
-
   if (motor_change) {
     // set target position
     int target = motor_change;
-    //target = 250*sin(prevT/1e6);
-
     // PID constants
-    float kp = 1;
-    float kd = 0.6;
-    float ki = 0.1;
+    float kp = 1.2;
+    float kd = 0.3;
+    float ki = 0.001;
 
     // time difference
     long currT = micros();
@@ -94,9 +89,10 @@ void loop() {
 
     // store previous error
     eprev = e;
+    delay(3);
+    motor_change = 0;
 
   }
-
   if (arm_movement)
   {
     if (arm_movement == openARM) {
@@ -111,12 +107,15 @@ void loop() {
       digitalWrite(armOP, LOW);
       digitalWrite(armCL, LOW);
     }
+    delay(3);
     arm_movement = 0;
   }
 
+  steer_move = 320;
 
   if (steer_move) {
     myStepper.step(steer_move / 5.625);
+    delay(3);
     steer_move = 0;
   }
 
