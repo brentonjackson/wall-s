@@ -1,12 +1,4 @@
 import React, { useState, useEffect } from "react";
-import {
-  Card,
-  CardContent,
-  Typography,
-  CircularProgress,
-} from "@material-ui/core/";
-// import stockPhoto from "./stockPhoto.jpg";
-
 import { fetchFrame } from "../../api/fetchFrame";
 
 const Frame = () => {

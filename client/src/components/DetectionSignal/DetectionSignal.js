@@ -15,7 +15,6 @@ const DetectionSignal = () => {
           return newData;
         })
         .then((newData) => {
-          console.log(newData.data);
           setIsDisabled((prevState) => newData.data);
         })
         .catch((err) => {
