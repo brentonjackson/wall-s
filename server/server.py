@@ -18,7 +18,8 @@ def get_output_layers(net):
 
 
 def draw_prediction(img, class_id, confidence, x, y, x_plus_w, y_plus_h):
-    label = str(classes[class_id])
+    label = str(classes[class_id]) + " - " + \
+        str(round(confidence*100, 2)) + "%"
     color = COLORS[class_id]
     cv2.rectangle(img, (x, y), (x_plus_w, y_plus_h), color, 2)
     cv2.putText(img, label, (x-10, y-10),
@@ -60,7 +61,7 @@ while True:
             scores = detection[5:]
             class_id = np.argmax(scores)
             confidence = scores[class_id]
-            if confidence > 0.5:
+            if confidence > 0.8:
                 center_x = int(detection[0] * width)
                 center_y = int(detection[1] * height)
                 w = int(detection[2] * width)
@@ -81,6 +82,8 @@ while True:
         h = box[3]
         draw_prediction(frame, class_ids[i], confidences[i], round(
             x), round(y), round(x+w), round(y+h))
+
+    num_objects = len(indices)
 
     cv2.imwrite("currentFrame.jpg", frame)
 
