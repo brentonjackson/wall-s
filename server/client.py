@@ -17,11 +17,11 @@ import time
 import cv2
 
 
-arduino = serial.Serial(port='/dev/ttyACM0', baudrate=115200, timeout=.1)
+# arduino = serial.Serial(port='/dev/ttyACM0', baudrate=115200, timeout=.1)
 
 
-def write_read(x):
-    arduino.write(bytes(str(x), 'utf-8'))
+# def write_read(x):
+#     arduino.write(bytes(str(x), 'utf-8'))
 
 
 # construct argument parser and parse arguments
@@ -73,7 +73,7 @@ while True:
         second byte:  arm   -> open close  off
         third byte:   steer -> angle       off
     """
-    write_read(commands.decode())
+    # write_read(commands.decode())
 
     # recieve.data
     # if not objects in data:
