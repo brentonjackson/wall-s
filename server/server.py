@@ -5,6 +5,7 @@ import cv2
 import imagezmq
 from PIL import Image, ImageOps
 import numpy as np
+import time
 
 imageHub = imagezmq.ImageHub()
 # initialize neural network stuff #
@@ -54,9 +55,14 @@ while True:
     blob = cv2.dnn.blobFromImage(
         frame, scale, (416, 416), (0, 0, 0), True, crop=False)
     net.setInput(blob)
-    outs = net.forward(get_output_layers(net))
+    # blocking operation - takes about a sec
+    # causes screen lag since pi camera continuously sends
+    # images faster than this can update
+    # plus reading and writing files can further slow
+    # down operation speed
+    detections = net.forward(get_output_layers(net))
 
-    for out in outs:
+    for out in detections:
         for detection in out:
             scores = detection[5:]
             class_id = np.argmax(scores)
@@ -90,7 +96,10 @@ while True:
     ######## WEB SERVER PROCESSING ##########
 
     f = open('isThereTrash.txt', 'w')
-    f.write("true")
+    if num_objects > 0:
+        f.write("true")
+    else:
+        f.write("false")
     f.close()
 
     cv2.imwrite("../client/public/images/currentFrame.jpg", frame)
