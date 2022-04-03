@@ -103,14 +103,16 @@ while True:
     openARM 0x0F
     closeARM 0x1F
     """
-    motor = input("motor: ")
-    arm = input("arm: ")
-    steer = input("steer: ")
+    # motor = input("motor: ")
+    # arm = input("arm: ")
+    # steer = input("steer: ")
 
-    commands = [float(motor), float(arm), float(steer)]
-    imageHub.send_reply(bytes(str(commands), 'UTF-8'))
-    print(f'sent {motor} {arm} {steer}')
+    # commands = [float(motor), float(arm), float(steer)]
+    # imageHub.send_reply(bytes(str(commands), 'UTF-8'))
 
+    # print(f'sent {motor} {arm} {steer}')
+
+    imageHub.send_reply(b'OK')
     key = cv2.waitKey(1) & 0xFF
     if key == ord('q'):
         break
