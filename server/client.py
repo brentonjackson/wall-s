@@ -17,11 +17,11 @@ import time
 import cv2
 
 
-# arduino = serial.Serial(port='/dev/ttyACM0', baudrate=115200, timeout=.1)
+arduino = serial.Serial(port='/dev/ttyACM0', baudrate=115200, timeout=.1)
 
 
-# def write_read(x):
-#     arduino.write(bytes(str(x), 'utf-8'))
+def write_read(x):
+    arduino.write(bytes(str(x), 'utf-8'))
 
 
 # construct argument parser and parse arguments
@@ -44,38 +44,16 @@ while True:
     # read frame from camera and save it on raspberry pi
     frame = vs.read()
     cv2.imwrite("currentFrame.jpg", frame)
-    #img_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    #img_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-
-    #stop_data = cv2.CascadeClassifier('')
-
-    # found = stop_data.detectMultiScale(img_gray,
-    #                                minSize =(20, 20))
-
-    # we found the motor position
-    # call the arduino
 
     # send image to server and
     # save response from server processing
     commands = sender.send_image(rpiName, frame)
 
-    time.sleep(delay)
-    # f = open('positionData.txt', 'w')
-    # f.write(position.decode())
-    # f.close()
     """
     how commands work:
-        first byte:   motor -> location    off  
-        second byte:  arm   -> open close  off
-        third byte:   steer -> angle       off
+        first int:   motor -> location    off  
+        second int:  arm   -> open close  off
+        third int:   steer -> angle       off
     """
-    # write_read(commands.decode())
-
-    # recieve.data
-    # if not objects in data:
-  #      ardunio.goforward
-  #  else:
-  #      arduino.motor1(pos1)
-  #      arduino.motor2(pos2)
-
-    # time.sleep(delay)
+    write_read(commands.decode())
+    time.sleep(delay)

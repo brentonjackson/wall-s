@@ -107,6 +107,31 @@ while True:
     ########## PI INTERFACING ##########
 
     # Calculate locations for pi
+    # Go to closest object
+    minimum_y = 100000
+    direction = 0
+    for object in boxes:
+        if object[1] < minimum_y:
+            minimum_y = object[1]
+            direction = object[0] + object[2]/2
+
+    # convert direction to degrees
+    if direction < 104:
+        steer = -45
+    elif direction >= 104 and direction < 312:
+        steer = 0
+    elif direction > 312:
+        steer = 45
+
+    # 20 rotations
+    motor = 7200
+    arm = 0
+
+    # if no objects just go forward
+    if (num_objects == 0):
+        motor = 7200
+        arm = 0
+        steer = 0
 
     """      
     how commands work:
@@ -117,16 +142,13 @@ while True:
     openARM 0x0F
     closeARM 0x1F
     """
-    # motor = input("motor: ")
-    # arm = input("arm: ")
-    # steer = input("steer: ")
 
-    # commands = [float(motor), float(arm), float(steer)]
-    # imageHub.send_reply(bytes(str(commands), 'UTF-8'))
+    commands = [float(motor), float(arm), float(steer)]
+    imageHub.send_reply(bytes(str(commands), 'UTF-8'))
 
-    # print(f'sent {motor} {arm} {steer}')
+    print(f'sent {motor} {arm} {steer}')
 
-    imageHub.send_reply(b'OK')
+    # imageHub.send_reply(b'OK')
     key = cv2.waitKey(1) & 0xFF
     if key == ord('q'):
         break
