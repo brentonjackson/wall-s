@@ -45,7 +45,7 @@ while True:
     # receive frame
     rpiName, frame = imageHub.recv_image()
 
-    ########### PROCESS FRAME #######
+    ########### OBJECT DETECTION #######
     width = frame.shape[1]
     height = frame.shape[0]
     scale = 0.00392
@@ -84,9 +84,7 @@ while True:
 
     cv2.imwrite("currentFrame.jpg", frame)
 
-    #################################
-
-    ######## PROCESSING #####
+    ######## WEB SERVER PROCESSING ##########
 
     f = open('isThereTrash.txt', 'w')
     f.write("true")
@@ -94,10 +92,24 @@ while True:
 
     cv2.imwrite("../client/public/images/currentFrame.jpg", frame)
 
-    ##################################
-    # send position back to raspberry pi
-    x = 5
-    imageHub.send_reply(str(x).encode())
+    ########## PI INTERFACING ##########
+
+    """      
+    how commands work:
+        first int:   motor -> location    off  
+        second second:  arm   -> open close  off
+        third byte:   steer -> angle       off
+    
+    openARM 0x0F
+    closeARM 0x1F
+    """
+    motor = input("motor: ")
+    arm = input("arm: ")
+    steer = input("steer: ")
+
+    commands = [float(motor), float(arm), float(steer)]
+    imageHub.send_reply(bytes(str(commands), 'UTF-8'))
+    print(f'sent {motor} {arm} {steer}')
 
     key = cv2.waitKey(1) & 0xFF
     if key == ord('q'):

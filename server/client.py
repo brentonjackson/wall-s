@@ -7,12 +7,22 @@
 # argparse to process server ip address via command line
 # socket to get pi hostname
 # time to delay camera feed
+# Importing Libraries
 from imutils.video import VideoStream
 import imagezmq
 import argparse
 import socket
+import serial
 import time
 import cv2
+
+
+arduino = serial.Serial(port='/dev/ttyACM0', baudrate=115200, timeout=.1)
+
+
+def write_read(x):
+    arduino.write(bytes(str(x), 'utf-8'))
+
 
 # construct argument parser and parse arguments
 ap = argparse.ArgumentParser()
@@ -47,23 +57,24 @@ while True:
 
     # send image to server and
     # save response from server processing
-    position = sender.send_image(rpiName, frame)
-
-    # if we get a position from server, stop and go to that position
-    # until all positions visited
-    # else, go forward along path
-    if position == b'OK':
-        # move forward (control arduino)
-        print(position)
-    else:
-        # go to position
-        print(position)
+    commands = sender.send_image(rpiName, frame)
 
     f = open('isThereTrash.txt', 'w')
     f.write("true")
     f.close()
 
     time.sleep(delay)
+    # f = open('positionData.txt', 'w')
+    # f.write(position.decode())
+    # f.close()
+    """
+    how commands work:
+        first byte:   motor -> location    off  
+        second byte:  arm   -> open close  off
+        third byte:   steer -> angle       off
+    """
+    write_read(commands.decode())
+
     # recieve.data
     # if not objects in data:
   #      ardunio.goforward
