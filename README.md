@@ -1,6 +1,6 @@
 # Wall-S
 
-[![pic](https://challengepost-s3-challengepost.netdna-ssl.com/photos/production/challenge_photos/001/886/235/datas/full_width.PNG)](https://hackgsu-2022.devpost.com/)
+[![pic](https://challengepost-s3-challengepost.netdna-ssl.com/photos/production/challenge_photos/001/886/235/datas/full_width.PNG)](https://robotech2022.devpost.com/)
 
 <!-- ![pic](./client/public/images/robotech.png) -->
 <p align="center"><img src="./client/public/images/robotech.png" width="200" height="200" /></p>
